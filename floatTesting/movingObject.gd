@@ -34,7 +34,6 @@ func handleDir(delta):
 			pass
 	else:
 		pass
-		
 
 # func -- move 
 # args -- delta from physics proccess 
