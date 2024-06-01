@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://d3urm7y1l36aj"]
+[gd_scene load_steps=5 format=3 uid="uid://d3urm7y1l36aj"]
 
 [ext_resource type="PackedScene" uid="uid://gynfq7upfxek" path="res://mainPlayer.tscn" id="1_2bxf1"]
 [ext_resource type="Script" path="res://gameController.gd" id="1_3p47n"]
+[ext_resource type="PackedScene" uid="uid://dna84xunvpmop" path="res://testEnemy.tscn" id="3_b2ljc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2bw08"]
 size = Vector2(40, 40)
@@ -14,7 +15,7 @@ script = ExtResource("1_3p47n")
 [node name="worldAnchor" type="Node2D" parent="."]
 position = Vector2(1, 24)
 
-[node name="block7" type="Area2D" parent="worldAnchor"]
+[node name="block7" type="Area2D" parent="worldAnchor" groups=["walls"]]
 position = Vector2(-825, 41)
 scale = Vector2(19.36, 1.01843)
 
@@ -33,7 +34,7 @@ grow_vertical = 2
 position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_2bw08")
 
-[node name="block" type="Area2D" parent="worldAnchor"]
+[node name="block" type="Area2D" parent="worldAnchor" groups=["walls"]]
 position = Vector2(-153, 0)
 scale = Vector2(4.4, 1.00917)
 
@@ -52,7 +53,7 @@ grow_vertical = 2
 position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_2bw08")
 
-[node name="block6" type="Area2D" parent="worldAnchor"]
+[node name="block6" type="Area2D" parent="worldAnchor" groups=["walls"]]
 position = Vector2(303, 8)
 scale = Vector2(1.04, -7.48)
 
@@ -71,7 +72,7 @@ grow_vertical = 2
 position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_2bw08")
 
-[node name="block5" type="Area2D" parent="worldAnchor"]
+[node name="block5" type="Area2D" parent="worldAnchor" groups=["walls"]]
 position = Vector2(-865, 41)
 scale = Vector2(1, -11.56)
 
@@ -90,7 +91,7 @@ grow_vertical = 2
 position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_2bw08")
 
-[node name="block2" type="Area2D" parent="worldAnchor"]
+[node name="block2" type="Area2D" parent="worldAnchor" groups=["walls"]]
 position = Vector2(23, -16)
 
 [node name="ColorRect" type="ColorRect" parent="worldAnchor/block2"]
@@ -108,7 +109,25 @@ grow_vertical = 2
 position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_2bw08")
 
-[node name="block3" type="Area2D" parent="worldAnchor"]
+[node name="block2" type="Area2D" parent="worldAnchor/block2" groups=["walls"]]
+position = Vector2(-40, -120)
+
+[node name="ColorRect" type="ColorRect" parent="worldAnchor/block2/block2"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="worldAnchor/block2/block2"]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_2bw08")
+
+[node name="block3" type="Area2D" parent="worldAnchor" groups=["walls"]]
 position = Vector2(63, 8)
 scale = Vector2(6, 1)
 
@@ -127,7 +146,7 @@ grow_vertical = 2
 position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_2bw08")
 
-[node name="block4" type="Area2D" parent="worldAnchor"]
+[node name="block4" type="Area2D" parent="worldAnchor" groups=["walls"]]
 position = Vector2(-17, -96)
 scale = Vector2(8.08, 0.506005)
 
@@ -145,3 +164,18 @@ grow_vertical = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="worldAnchor/block4"]
 position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_2bw08")
+
+[node name="testEnemy" parent="worldAnchor" instance=ExtResource("3_b2ljc")]
+position = Vector2(-265, 12)
+
+[node name="testEnemy2" parent="worldAnchor" instance=ExtResource("3_b2ljc")]
+position = Vector2(-545, 20)
+
+[node name="testEnemy3" parent="worldAnchor" instance=ExtResource("3_b2ljc")]
+position = Vector2(183, -15)
+
+[node name="testEnemy4" parent="worldAnchor" instance=ExtResource("3_b2ljc")]
+position = Vector2(-665, 16)
+
+[node name="testEnemy5" parent="worldAnchor" instance=ExtResource("3_b2ljc")]
+position = Vector2(159, -120)

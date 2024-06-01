@@ -78,11 +78,11 @@ func move(delta):
 	if dir != 0: #dont update if zero
 		wallMark.target_position.x = 16 * dir # update raycast direction
 	
-	if !wallMark.is_colliding():
+	if wallMark.is_colliding() and wallMark.get_collider().is_in_group("walls"):
+		return 
+	else:
 		# move the world 
 		worldSpace.position.x += -dir * SPEED * delta 
-	else:
-		return
 
 # func -- jump
 # args -- jump position, delta from physics proccess 
@@ -117,7 +117,7 @@ func initializeColArray():
 func checkUpCol():
 	for i in range(topColArray.size()):
 		var checkRay : RayCast2D = topColArray[i]
-		if checkRay.is_colliding(): # check for raycast collision
+		if checkRay.is_colliding() and checkRay.get_collider().is_in_group("walls"): # check for raycast collision
 			var distance = position.y - checkRay.get_collision_point().y # get the distance 
 			if distance <= JUMPHEIGHT * JUMPSPEED: # if the distance is the same as or less than jumpheight
 				jumpTarget = distance - 16 # jump to distance with - 4 as a buffer 
@@ -131,11 +131,13 @@ func checkUpCol():
 #
 # Toggles grounded status on based on signal from attatched area2d
 func groundCollision(area): # signal from feet
-	grounded = true # on ground *WOAH*
+	if area.is_in_group("walls"): # on ground *WOAH*
+		grounded = true 
 
 # func -- groundCollision
 # args -- area (target area 2d)
 #
 # Toggles grounded status off based on signal from attatched area2d
 func cancelCollision(area): # feet leaving signal 
-	grounded = false # NOT ON THE GROUND WAH
+	if area.is_in_group("walls"): # NOT ON THE GROUND WAH
+		grounded = false 

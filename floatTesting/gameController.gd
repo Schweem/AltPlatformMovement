@@ -9,4 +9,4 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	DisplayServer.window_set_title(title + " | fps: " + str(1/delta))
+	DisplayServer.window_set_title(title + " | fps: " + str(1/delta)) # fps and title in window title 
