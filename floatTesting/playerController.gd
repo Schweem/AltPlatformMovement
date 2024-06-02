@@ -29,6 +29,8 @@ const JUMPSPEED : float = 500.0 # mult
 var topColArray : Array = []
 var botColArray : Array = []
 
+var activeCollisions : int = 0
+
 var jumpTarget : float = JUMPHEIGHT
 var coyoteTime : float = 0.1
 @onready var baseCoyoteTime : float = coyoteTime
@@ -143,19 +145,32 @@ func checkUpCol():
 				jumpTarget = floor(JUMPHEIGHT * JUMPSPEED)
 		else:
 			pass
-			
+
+# func -- checkDownCol
+# args -- none 
+#
+# Takes the initialized downfacing raycast array and looks for and handles collision
+# with the floor
 func checkDownCol():
-	for i in range(botColArray.size()):
-		var botCheckRay : RayCast2D = botColArray[i]
-		if botCheckRay.is_colliding() and botCheckRay.get_collider().is_in_group("walls"):
-			var distance = floor(position.y - botCheckRay.get_collision_point().y)
-			if distance < 0:
-				grounded = true
-				lerp(worldSpace.position.y, worldSpace.position.y + distance, 0.1)
-				distance = floor(position.y - botCheckRay.get_collision_point().y)
-				print(distance)
-		else:
-			grounded = false
+	for i in range(botColArray.size()): # go through the cast array 
+		var botCheckRay : RayCast2D = botColArray[i] # local reference to current check 
+		if botCheckRay.is_colliding(): # collision
+			if botCheckRay.get_collider().is_in_group("walls"): # with the walls + floor
+				var distance = floor(position.y - botCheckRay.get_collision_point().y) # calculate distance to point
+				if distance < 0: # more than 0?
+					grounded = true # we are grounded 
+					lerp(worldSpace.position.y, worldSpace.position.y + distance, 0.1) # quickly adjust worldspace by distance 
+					distance = floor(position.y - botCheckRay.get_collision_point().y) # reset distance 
+				if activeCollisions < botColArray.size(): # increment collision counter 
+					activeCollisions += 1
+					break # move to next ray
+		else: # not colliding 
+			if activeCollisions > 0:
+				activeCollisions -= 1 # remove collision status 
+				break # move to next ray
+				
+		if activeCollisions == 0: # no active collisions?
+			grounded = false # not on the ground! 
 		
 
 # func -- groundCollision
