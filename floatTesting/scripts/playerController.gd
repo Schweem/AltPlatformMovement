@@ -7,9 +7,6 @@ extends CharacterBody2D
 @onready var topCol : Node2D = $topColliders
 @onready var botCol : Node2D = $botColliders
 
-# TODO -- make this an array like the one looking up
-@onready var bottomCol : RayCast2D = $floorCheck
-
 #DEBUG
 @onready var coordText : RichTextLabel = $RichTextLabel
 
@@ -88,9 +85,9 @@ func move(delta):
 	dir = Input.get_axis("ui_left", "ui_right")
 	if dir != 0: #dont update if zero
 		wallMark.target_position.x = 16 * dir # update raycast direction
-	
-	if wallMark.is_colliding() and wallMark.get_collider().is_in_group("walls"):
-		return 
+	if wallMark.is_colliding():
+		if wallMark.get_collider != null and wallMark.get_collider().is_in_group("walls"):
+			return 
 	else:
 		# move the world 
 		worldSpace.position.x += -dir * SPEED * delta 
@@ -155,15 +152,22 @@ func checkDownCol():
 	for i in range(botColArray.size()): # go through the cast array 
 		var botCheckRay : RayCast2D = botColArray[i] # local reference to current check 
 		if botCheckRay.is_colliding(): # collision
-			if botCheckRay.get_collider().is_in_group("walls"): # with the walls + floor
-				var distance = floor(position.y - botCheckRay.get_collision_point().y) # calculate distance to point
-				if distance < 0: # more than 0?
-					grounded = true # we are grounded 
-					lerp(worldSpace.position.y, worldSpace.position.y + distance, 0.1) # quickly adjust worldspace by distance 
-					distance = floor(position.y - botCheckRay.get_collision_point().y) # reset distance 
-				if activeCollisions < botColArray.size(): # increment collision counter 
-					activeCollisions += 1
-					break # move to next ray
+			var collider = botCheckRay.get_collider()
+			if collider != null:
+				if collider.is_in_group("walls"): # with the walls + floor
+					var distance = floor(position.y - botCheckRay.get_collision_point().y) # calculate distance to point
+					if distance < 0: # more than 0?
+						grounded = true # we are grounded 
+						lerp(worldSpace.position.y, worldSpace.position.y + distance, 0.1) # quickly adjust worldspace by distance 
+						distance = floor(position.y - botCheckRay.get_collision_point().y) # reset distance 
+						
+					if activeCollisions < botColArray.size(): # increment collision counter 
+						activeCollisions += 1
+						break # move to next ray
+				elif botCheckRay.is_colliding() and collider.is_in_group("enemy"):
+					worldSpace.position.y += JUMPHEIGHT
+					var target = collider.get_parent().get_parent()
+					target.queue_free()
 		else: # not colliding 
 			if activeCollisions > 0:
 				activeCollisions -= 1 # remove collision status 

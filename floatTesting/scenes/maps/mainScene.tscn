@@ -1,23 +1,27 @@
-[gd_scene load_steps=5 format=3 uid="uid://d3urm7y1l36aj"]
+[gd_scene load_steps=6 format=3 uid="uid://d3urm7y1l36aj"]
 
-[ext_resource type="PackedScene" uid="uid://gynfq7upfxek" path="res://mainPlayer.tscn" id="1_2bxf1"]
-[ext_resource type="Script" path="res://gameController.gd" id="1_3p47n"]
-[ext_resource type="PackedScene" uid="uid://dna84xunvpmop" path="res://testEnemy.tscn" id="3_b2ljc"]
+[ext_resource type="Script" path="res://scripts/gameController.gd" id="1_tsawv"]
+[ext_resource type="PackedScene" uid="uid://gynfq7upfxek" path="res://scenes/mainPlayer.tscn" id="2_mnd8r"]
+[ext_resource type="PackedScene" uid="uid://dcr1tljqspujy" path="res://scenes/uiController.tscn" id="3_4cj58"]
+[ext_resource type="PackedScene" uid="uid://dna84xunvpmop" path="res://scenes/testEnemy.tscn" id="3_lp5xa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2bw08"]
 size = Vector2(40, 40)
 
 [node name="sceneRoot" type="Node2D"]
-script = ExtResource("1_3p47n")
+script = ExtResource("1_tsawv")
 
-[node name="playerAnchor" parent="." instance=ExtResource("1_2bxf1")]
+[node name="playerAnchor" parent="." instance=ExtResource("2_mnd8r")]
+
+[node name="UiController" parent="playerAnchor" instance=ExtResource("3_4cj58")]
+process_priority = 1
 
 [node name="worldAnchor" type="Node2D" parent="."]
 position = Vector2(1, 24)
 
 [node name="block7" type="Area2D" parent="worldAnchor" groups=["walls"]]
-position = Vector2(-825, 41)
-scale = Vector2(19.36, 1.01843)
+position = Vector2(-40.9999, 17)
+scale = Vector2(19.12, 1.01843)
 
 [node name="ColorRect" type="ColorRect" parent="worldAnchor/block7"]
 anchors_preset = 8
@@ -35,7 +39,7 @@ position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_2bw08")
 
 [node name="block" type="Area2D" parent="worldAnchor" groups=["walls"]]
-position = Vector2(-153, 0)
+position = Vector2(783, 17)
 scale = Vector2(4.4, 1.00917)
 
 [node name="ColorRect" type="ColorRect" parent="worldAnchor/block"]
@@ -54,8 +58,8 @@ position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_2bw08")
 
 [node name="block6" type="Area2D" parent="worldAnchor" groups=["walls"]]
-position = Vector2(303, 8)
-scale = Vector2(1.04, -7.48)
+position = Vector2(183, -24)
+scale = Vector2(4.16, -0.160001)
 
 [node name="ColorRect" type="ColorRect" parent="worldAnchor/block6"]
 anchors_preset = 8
@@ -73,7 +77,7 @@ position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_2bw08")
 
 [node name="block5" type="Area2D" parent="worldAnchor" groups=["walls"]]
-position = Vector2(-865, 41)
+position = Vector2(-81, 17)
 scale = Vector2(1, -11.56)
 
 [node name="ColorRect" type="ColorRect" parent="worldAnchor/block5"]
@@ -91,8 +95,28 @@ grow_vertical = 2
 position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_2bw08")
 
+[node name="block8" type="Area2D" parent="worldAnchor" groups=["walls"]]
+position = Vector2(366.609, -55.9999)
+scale = Vector2(2.60977, 0.199999)
+
+[node name="ColorRect" type="ColorRect" parent="worldAnchor/block8"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="worldAnchor/block8"]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_2bw08")
+
 [node name="block2" type="Area2D" parent="worldAnchor" groups=["walls"]]
-position = Vector2(23, -16)
+position = Vector2(471, -32)
+scale = Vector2(2.60977, 0.199999)
 
 [node name="ColorRect" type="ColorRect" parent="worldAnchor/block2"]
 anchors_preset = 8
@@ -109,27 +133,9 @@ grow_vertical = 2
 position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_2bw08")
 
-[node name="block2" type="Area2D" parent="worldAnchor/block2" groups=["walls"]]
-position = Vector2(-40, -120)
-
-[node name="ColorRect" type="ColorRect" parent="worldAnchor/block2/block2"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_right = 40.0
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="worldAnchor/block2/block2"]
-position = Vector2(20, 20)
-shape = SubResource("RectangleShape2D_2bw08")
-
 [node name="block3" type="Area2D" parent="worldAnchor" groups=["walls"]]
-position = Vector2(63, 8)
-scale = Vector2(6, 1)
+position = Vector2(847, -16)
+scale = Vector2(6, 0.16)
 
 [node name="ColorRect" type="ColorRect" parent="worldAnchor/block3"]
 anchors_preset = 8
@@ -147,8 +153,8 @@ position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_2bw08")
 
 [node name="block4" type="Area2D" parent="worldAnchor" groups=["walls"]]
-position = Vector2(-17, -96)
-scale = Vector2(8.08, 0.506005)
+position = Vector2(767, -120)
+scale = Vector2(8.08, 0.186005)
 
 [node name="ColorRect" type="ColorRect" parent="worldAnchor/block4"]
 anchors_preset = 8
@@ -165,17 +171,17 @@ grow_vertical = 2
 position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_2bw08")
 
-[node name="testEnemy" parent="worldAnchor" instance=ExtResource("3_b2ljc")]
-position = Vector2(-265, 12)
+[node name="testEnemy" parent="worldAnchor" instance=ExtResource("3_lp5xa")]
+position = Vector2(519, -12)
 
-[node name="testEnemy2" parent="worldAnchor" instance=ExtResource("3_b2ljc")]
-position = Vector2(-545, 20)
+[node name="testEnemy2" parent="worldAnchor" instance=ExtResource("3_lp5xa")]
+position = Vector2(239, -4)
 
-[node name="testEnemy3" parent="worldAnchor" instance=ExtResource("3_b2ljc")]
-position = Vector2(183, -15)
+[node name="testEnemy3" parent="worldAnchor" instance=ExtResource("3_lp5xa")]
+position = Vector2(967, -39)
 
-[node name="testEnemy4" parent="worldAnchor" instance=ExtResource("3_b2ljc")]
-position = Vector2(-665, 16)
+[node name="testEnemy4" parent="worldAnchor" instance=ExtResource("3_lp5xa")]
+position = Vector2(119, -8)
 
-[node name="testEnemy5" parent="worldAnchor" instance=ExtResource("3_b2ljc")]
-position = Vector2(159, -120)
+[node name="testEnemy5" parent="worldAnchor" instance=ExtResource("3_lp5xa")]
+position = Vector2(943, -144)

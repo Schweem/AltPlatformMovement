@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://gynfq7upfxek"]
+[gd_scene load_steps=4 format=3 uid="uid://gynfq7upfxek"]
 
-[ext_resource type="Script" path="res://playerController.gd" id="1_c4xo6"]
+[ext_resource type="Script" path="res://scripts/playerController.gd" id="1_c4xo6"]
+[ext_resource type="FontFile" uid="uid://b0mmbac6tyew6" path="res://Kenney Mini Square.ttf" id="2_fprvs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p2gw7"]
 size = Vector2(16, 16)
@@ -11,6 +12,7 @@ size = Vector2(16, 16)
 script = ExtResource("1_c4xo6")
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+position = Vector2(0, -48)
 
 [node name="playerBody" type="ColorRect" parent="CharacterBody2D"]
 anchors_preset = 8
@@ -24,6 +26,7 @@ offset_right = 8.0
 offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0.65098, 1, 0.517647, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 shape = SubResource("RectangleShape2D_p2gw7")
@@ -50,7 +53,7 @@ collide_with_bodies = false
 
 [node name="floorCheck" type="RayCast2D" parent="CharacterBody2D/botColliders"]
 position = Vector2(-8, 0)
-target_position = Vector2(1, 14)
+target_position = Vector2(0, 14)
 collide_with_areas = true
 collide_with_bodies = false
 
@@ -60,26 +63,13 @@ target_position = Vector2(0, 14)
 collide_with_areas = true
 collide_with_bodies = false
 
-[node name="floorCheck3" type="RayCast2D" parent="CharacterBody2D/botColliders"]
-position = Vector2(-4, 0)
-target_position = Vector2(0, 14)
-collide_with_areas = true
-collide_with_bodies = false
-
-[node name="floorCheck4" type="RayCast2D" parent="CharacterBody2D/botColliders"]
-position = Vector2(4, 0)
-target_position = Vector2(0, 14)
-collide_with_areas = true
-collide_with_bodies = false
-
-[node name="floorCheck5" type="RayCast2D" parent="CharacterBody2D/botColliders"]
-target_position = Vector2(0, 14)
-collide_with_areas = true
-collide_with_bodies = false
-
 [node name="RichTextLabel" type="RichTextLabel" parent="CharacterBody2D"]
-offset_left = -16.0
-offset_top = -48.0
-offset_right = 24.0
-offset_bottom = -8.0
+z_index = 2
+texture_filter = 1
+offset_left = -20.0
+offset_top = -56.0
+offset_right = 20.0
+offset_bottom = -16.0
 scale = Vector2(0.991453, 1)
+theme_override_colors/default_color = Color(0, 1, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_fprvs")

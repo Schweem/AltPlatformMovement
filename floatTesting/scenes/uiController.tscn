@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcr1tljqspujy"]
+
+[ext_resource type="FontFile" uid="uid://b0mmbac6tyew6" path="res://Kenney Mini Square.ttf" id="1_xi8wu"]
+
+[node name="UiController" type="CanvasLayer"]
+follow_viewport_enabled = true
+
+[node name="score" type="RichTextLabel" parent="."]
+texture_filter = 1
+offset_left = -272.0
+offset_top = -280.0
+offset_right = -120.0
+offset_bottom = -180.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("1_xi8wu")
+theme_override_font_sizes/normal_font_size = 40
+text = "TEST
+000000"
+
+[node name="level" type="RichTextLabel" parent="."]
+texture_filter = 1
+offset_left = 32.0
+offset_top = -280.0
+offset_right = 184.0
+offset_bottom = -180.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("1_xi8wu")
+theme_override_font_sizes/normal_font_size = 40
+text = "WORLD
+1-1"
+
+[node name="other" type="RichTextLabel" parent="."]
+texture_filter = 1
+offset_left = 192.0
+offset_top = -280.0
+offset_right = 344.0
+offset_bottom = -180.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("1_xi8wu")
+theme_override_font_sizes/normal_font_size = 40
+text = "MISC
+-----"
