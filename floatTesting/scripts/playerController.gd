@@ -9,6 +9,9 @@ extends CharacterBody2D
 @onready var botCol : Node2D = $botColliders
 @onready var sprite : AnimatedSprite2D = $playerBody
 
+# dialouge
+@onready var dialougeController : CanvasLayer = $UiController 
+
 #DEBUG
 @onready var coordText : RichTextLabel = $RichTextLabel
 
@@ -89,8 +92,11 @@ func move(delta):
 		wallMark.target_position.x = 16 * dir # update raycast direction
 		sprite.scale.x = dir
 	if wallMark.is_colliding():
-		if wallMark.get_collider != null and wallMark.get_collider().is_in_group("walls"):
-			return 
+		if wallMark.get_collider != null:
+			if wallMark.get_collider().is_in_group("walls"):
+				return 
+		else:
+			pass
 	else:
 		# move the world 
 		worldSpace.position.x += -dir * SPEED * delta 
@@ -170,6 +176,8 @@ func checkDownCol():
 					worldSpace.position.y += JUMPHEIGHT
 					var target = collider.get_parent().get_parent()
 					target.queue_free()
+					dialougeController.score += 1 #TODO -- hook this up to a score manager
+					dialougeController.speak({"woah" : "PLAYER"}, 0) #TODO -- hook this up to a manager too (placeholder though)
 		else: # not colliding 
 			if activeCollisions > 0:
 				activeCollisions -= 1 # remove collision status 

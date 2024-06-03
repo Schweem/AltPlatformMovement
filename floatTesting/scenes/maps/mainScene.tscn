@@ -110,6 +110,25 @@ grow_vertical = 2
 position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_2bw08")
 
+[node name="block9" type="Area2D" parent="worldAnchor" groups=["walls"]]
+position = Vector2(711, -9)
+scale = Vector2(0.33091, 0.84)
+
+[node name="ColorRect" type="ColorRect" parent="worldAnchor/block9"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="worldAnchor/block9"]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_2bw08")
+
 [node name="block2" type="Area2D" parent="worldAnchor" groups=["walls"]]
 position = Vector2(471, -32)
 scale = Vector2(2.60977, 0.199999)
@@ -171,7 +190,7 @@ shape = SubResource("RectangleShape2D_2bw08")
 position = Vector2(519, -12)
 
 [node name="testEnemy2" parent="worldAnchor" instance=ExtResource("3_lp5xa")]
-position = Vector2(239, -4)
+position = Vector2(223, -48)
 
 [node name="testEnemy3" parent="worldAnchor" instance=ExtResource("3_lp5xa")]
 position = Vector2(967, -39)
