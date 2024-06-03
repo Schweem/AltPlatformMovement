@@ -88,9 +88,11 @@ func move(delta):
 	coordText.text = str(position)
 	# grab movement direction 
 	dir = Input.get_axis("ui_left", "ui_right")
+	
 	if dir != 0: #dont update if zero
 		wallMark.target_position.x = 16 * dir # update raycast direction
 		sprite.scale.x = dir
+		
 	if wallMark.is_colliding():
 		if wallMark.get_collider != null:
 			if wallMark.get_collider().is_in_group("walls"):
@@ -164,6 +166,7 @@ func checkDownCol():
 			if collider != null:
 				if collider.is_in_group("walls"): # with the walls + floor
 					var distance = floor(position.y - botCheckRay.get_collision_point().y) # calculate distance to point
+					
 					if distance < 0: # more than 0?
 						grounded = true # we are grounded 
 						lerp(worldSpace.position.y, worldSpace.position.y + distance, 0.1) # quickly adjust worldspace by distance 
@@ -172,12 +175,14 @@ func checkDownCol():
 					if activeCollisions < botColArray.size(): # increment collision counter 
 						activeCollisions += 1
 						break # move to next ray
+						
 				elif botCheckRay.is_colliding() and collider.is_in_group("enemy"):
 					worldSpace.position.y += JUMPHEIGHT
 					var target = collider.get_parent().get_parent()
 					target.queue_free()
 					dialougeController.score += 1 #TODO -- hook this up to a score manager
 					dialougeController.speak({"woah" : "PLAYER"}, 0) #TODO -- hook this up to a manager too (placeholder though)
+					
 		else: # not colliding 
 			if activeCollisions > 0:
 				activeCollisions -= 1 # remove collision status 
