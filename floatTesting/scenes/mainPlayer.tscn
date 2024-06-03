@@ -1,7 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://gynfq7upfxek"]
+[gd_scene load_steps=7 format=3 uid="uid://gynfq7upfxek"]
 
 [ext_resource type="Script" path="res://scripts/playerController.gd" id="1_c4xo6"]
 [ext_resource type="FontFile" uid="uid://b0mmbac6tyew6" path="res://Kenney Mini Square.ttf" id="2_fprvs"]
+[ext_resource type="Texture2D" uid="uid://clftk8qjvpur2" path="res://sprites/playerCharacter.png" id="2_g2e5p"]
+[ext_resource type="PackedScene" uid="uid://dcr1tljqspujy" path="res://scenes/uiController.tscn" id="4_sci46"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0nhd1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_g2e5p")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p2gw7"]
 size = Vector2(16, 16)
@@ -9,24 +22,24 @@ size = Vector2(16, 16)
 [node name="playerAnchor" type="Node2D"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+scale = Vector2(2, 2)
 script = ExtResource("1_c4xo6")
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
 position = Vector2(0, -48)
 
-[node name="playerBody" type="ColorRect" parent="CharacterBody2D"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -8.0
-offset_top = -8.0
-offset_right = 8.0
-offset_bottom = 8.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.65098, 1, 0.517647, 1)
+[node name="ColorRect" type="ColorRect" parent="CharacterBody2D/Camera2D"]
+z_index = -10
+offset_left = -160.0
+offset_top = -120.0
+offset_right = 160.0
+offset_bottom = 120.0
+color = Color(0.160784, 0.14902, 0.12549, 1)
+
+[node name="playerBody" type="AnimatedSprite2D" parent="CharacterBody2D"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_0nhd1")
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 shape = SubResource("RectangleShape2D_p2gw7")
@@ -53,13 +66,18 @@ collide_with_bodies = false
 
 [node name="floorCheck" type="RayCast2D" parent="CharacterBody2D/botColliders"]
 position = Vector2(-8, 0)
-target_position = Vector2(0, 14)
+target_position = Vector2(0, 8)
 collide_with_areas = true
 collide_with_bodies = false
 
 [node name="floorCheck2" type="RayCast2D" parent="CharacterBody2D/botColliders"]
 position = Vector2(8, 0)
-target_position = Vector2(0, 14)
+target_position = Vector2(0, 8)
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="floorCheck3" type="RayCast2D" parent="CharacterBody2D/botColliders"]
+target_position = Vector2(0, 8)
 collide_with_areas = true
 collide_with_bodies = false
 
@@ -73,3 +91,6 @@ offset_bottom = -16.0
 scale = Vector2(0.991453, 1)
 theme_override_colors/default_color = Color(0, 1, 0, 1)
 theme_override_fonts/normal_font = ExtResource("2_fprvs")
+
+[node name="UiController" parent="CharacterBody2D" instance=ExtResource("4_sci46")]
+process_priority = 1

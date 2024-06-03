@@ -2,10 +2,12 @@ extends CharacterBody2D
 
 #onready vars to be init at start 
 @onready var worldSpace : Node2D = get_tree().current_scene.get_child(1) # second child is world, first is player 
+
 @onready var floorMark : CollisionShape2D = $Area2D/floor
 @onready var wallMark : RayCast2D = $wallCast
 @onready var topCol : Node2D = $topColliders
 @onready var botCol : Node2D = $botColliders
+@onready var sprite : AnimatedSprite2D = $playerBody
 
 #DEBUG
 @onready var coordText : RichTextLabel = $RichTextLabel
@@ -85,6 +87,7 @@ func move(delta):
 	dir = Input.get_axis("ui_left", "ui_right")
 	if dir != 0: #dont update if zero
 		wallMark.target_position.x = 16 * dir # update raycast direction
+		sprite.scale.x = dir
 	if wallMark.is_colliding():
 		if wallMark.get_collider != null and wallMark.get_collider().is_in_group("walls"):
 			return 
@@ -107,7 +110,6 @@ func jump(jumpPos, delta):
 
 # func -- initializeColArray
 # args -- none 
-# TODO -- SETUP THE DOWN-FACING ARRAY IN HERE TOO 
 #
 # Looks through all children of root node for upward raycasts. 
 # Adds all to raycast array, enables, and sets target position
@@ -117,7 +119,7 @@ func initializeColArray():
 		var currentBotRay : RayCast2D = botCol.get_child(i) # init bottom array too 
 		botColArray.append(currentBotRay) # add bottom ray to array
 		currentBotRay.enabled = true # and the bottom one 
-		currentBotRay.target_position.y = position.y + 14 
+		currentBotRay.target_position.y = 10
 		
 	# top colliders 
 	for i in range(topCol.get_child_count()): # go through the raycasts that look up at the night sky 

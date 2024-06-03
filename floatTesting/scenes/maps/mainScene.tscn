@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://d3urm7y1l36aj"]
+[gd_scene load_steps=5 format=3 uid="uid://d3urm7y1l36aj"]
 
 [ext_resource type="Script" path="res://scripts/gameController.gd" id="1_tsawv"]
 [ext_resource type="PackedScene" uid="uid://gynfq7upfxek" path="res://scenes/mainPlayer.tscn" id="2_mnd8r"]
-[ext_resource type="PackedScene" uid="uid://dcr1tljqspujy" path="res://scenes/uiController.tscn" id="3_4cj58"]
 [ext_resource type="PackedScene" uid="uid://dna84xunvpmop" path="res://scenes/testEnemy.tscn" id="3_lp5xa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2bw08"]
@@ -12,9 +11,6 @@ size = Vector2(40, 40)
 script = ExtResource("1_tsawv")
 
 [node name="playerAnchor" parent="." instance=ExtResource("2_mnd8r")]
-
-[node name="UiController" parent="playerAnchor" instance=ExtResource("3_4cj58")]
-process_priority = 1
 
 [node name="worldAnchor" type="Node2D" parent="."]
 position = Vector2(1, 24)
