@@ -24,15 +24,16 @@ func _physics_process(delta):
 #
 # Used to flip the moving body on wall collisions  
 func handleDir(delta):
-	if dirRay.is_colliding():
-		if dirRay.get_collider().is_in_group("walls") and canFlip:
-			facing = -facing
-			dirRay.target_position = -dirRay.target_position
-			canFlip = false
+	if dirRay != null:
+		if dirRay.is_colliding():
+			if dirRay.get_collider().is_in_group("walls") and canFlip:
+				facing = -facing
+				dirRay.target_position = -dirRay.target_position
+				canFlip = false
+			else:
+				pass
 		else:
 			pass
-	else:
-		pass
 
 # func -- move 
 # args -- delta from physics proccess 
@@ -40,8 +41,9 @@ func handleDir(delta):
 # Used to move the body across the world space 
 func move(delta):
 	position.x += MOVESPEED * facing * delta
-	if !dirRay.is_colliding():
-		canFlip = true
+	if !dirRay == null:
+		if !dirRay.is_colliding():
+			canFlip = true
 
 # func -- handleGravity
 # args -- delta from physics proccess
@@ -56,7 +58,7 @@ func onGround(area):
 		grounded = true 
 
 func offGround(area):
-	print('fuck colliders')
+	#print('fuck colliders')
 	if area.is_in_group("walls"):
 		grounded = false 
 
@@ -67,6 +69,6 @@ func onSolidGround(body):
 
 
 func offSolidGround(body):
-	print('fuck tilesets')
+	#print('fuck tilesets')
 	if body.is_in_group("walls"):
 		grounded = false 

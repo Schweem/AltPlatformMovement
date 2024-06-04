@@ -4,7 +4,6 @@ extends Node2D
 @onready var worldSpace : Node2D = get_tree().current_scene.get_child(1) # second child is world, first is player 
 
 #collision casts and cast arrays 
-@onready var floorMark : CollisionShape2D = $Area2D/floor
 @onready var wallMark : RayCast2D = $CharacterBody2D/wallCast
 @onready var topCol : Node2D = $CharacterBody2D/topColliders
 @onready var botCol : Node2D = $CharacterBody2D/botColliders
@@ -135,7 +134,7 @@ func initializeColArray():
 		var currentBotRay : RayCast2D = botCol.get_child(i) # init bottom array too 
 		botColArray.append(currentBotRay) # add bottom ray to array
 		currentBotRay.enabled = true # and the bottom one 
-		currentBotRay.target_position.y = 10
+		currentBotRay.target_position.y = 8
 		
 	# top colliders 
 	for i in range(topCol.get_child_count()): # go through the raycasts that look up at the night sky 
@@ -172,6 +171,16 @@ func checkDownCol():
 		if botCheckRay.is_colliding(): # collision
 			var collider = botCheckRay.get_collider()
 			if collider != null:
+				
+				if collider.is_in_group("enemy"):
+					print('enemy')
+					worldSpace.position.y += JUMPHEIGHT
+					var target = collider
+					target.queue_free()
+					dialougeController.score += 1 #TODO -- hook this up to a score manager
+					dialougeController.speak({"*poof*" : "enemy"}, 0) #TODO -- hook this up to a manager too (placeholder though)
+					break
+					
 				if collider.is_in_group("walls"): # with the walls + floor
 					var distance = floor(position.y - botCheckRay.get_collision_point().y) # calculate distance to point
 					
@@ -183,13 +192,6 @@ func checkDownCol():
 					if activeCollisions < botColArray.size(): # increment collision counter 
 						activeCollisions += 1
 						break # move to next ray
-						
-				elif botCheckRay.is_colliding() and collider.is_in_group("enemy"):
-					worldSpace.position.y += JUMPHEIGHT
-					var target = collider.get_parent().get_parent()
-					target.queue_free()
-					dialougeController.score += 1 #TODO -- hook this up to a score manager
-					dialougeController.speak({"*poof*" : "enemy"}, 0) #TODO -- hook this up to a manager too (placeholder though)
 					
 		else: # not colliding 
 			if activeCollisions > 0:

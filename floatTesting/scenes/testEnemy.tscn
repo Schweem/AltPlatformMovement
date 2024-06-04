@@ -8,13 +8,13 @@ size = Vector2(16, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_817mj"]
 size = Vector2(16, 16)
 
-[node name="testEnemy" type="Node2D"]
+[node name="testEnemy" type="Node2D" groups=["enemy"]]
 position = Vector2(-105, -16)
 script = ExtResource("1_qqvn7")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["enemy"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" groups=["enemy"]]
 shape = SubResource("RectangleShape2D_1rrbh")
 
 [node name="ColorRect" type="ColorRect" parent="CharacterBody2D"]
@@ -23,12 +23,13 @@ offset_top = -8.0
 offset_right = 8.0
 offset_bottom = 8.0
 color = Color(1, 0.352941, 0.411765, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="wallCast" type="RayCast2D" parent="CharacterBody2D"]
 target_position = Vector2(16, 0)
 collide_with_areas = true
 
-[node name="feet" type="Area2D" parent="CharacterBody2D" groups=["enemy"]]
+[node name="feet" type="Area2D" parent="CharacterBody2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/feet"]
 shape = SubResource("RectangleShape2D_817mj")

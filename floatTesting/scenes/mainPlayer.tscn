@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cdcxjkud3x20n" path="res://sprites/interactionMarker.png" id="6_5blhr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7rh1f"]
-size = Vector2(10, 7)
+size = Vector2(9, 3.5)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0nhd1"]
 animations = [{
@@ -22,13 +22,14 @@ animations = [{
 }]
 
 [node name="playerAnchor" type="Node2D" groups=["player"]]
+process_physics_priority = 1
 script = ExtResource("1_c4xo6")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["player"]]
 scale = Vector2(2, 2)
 
 [node name="dialougeTrigger" type="CollisionShape2D" parent="CharacterBody2D"]
-position = Vector2(5, 1.5)
+position = Vector2(-0.5, -2.25)
 shape = SubResource("RectangleShape2D_7rh1f")
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]

@@ -105,7 +105,7 @@ func assignColors(conversation : Dictionary):
 			# TODO -- if exceeding current size of color array, make a new Color(randint(0,256),(0,256),(0,256)) something like that
 			else:
 				colorDict[name] = Color.WHITE_SMOKE # placeholder  
-	print(colorDict)
+	#print(colorDict)
 
 # func -- cleanUpLabels
 # args -- speaker richtextlabel and body text richtextlabel
