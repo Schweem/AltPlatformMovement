@@ -10,6 +10,10 @@
 - dictionary based speaker name color system
 ------
 ### Dev highlight reel
+![image](https://github.com/Schweem/AltPlatformMovement/assets/63567335/13ff44a2-820b-41f6-8caa-1644a065deec)
+- Tilesets, improved visuals
+- Some collision bugs 
+------
 ![image](https://github.com/Schweem/AltPlatformMovement/assets/63567335/68fb3354-5eda-457d-b81f-dd7a5c3dcce6)
 - Enhanced dialouge
   - Speaker names are stored in a dictionary with an assigned color
