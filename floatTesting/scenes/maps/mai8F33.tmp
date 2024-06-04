@@ -202,21 +202,5 @@ position = Vector2(119, -8)
 [node name="testEnemy5" parent="worldAnchor" instance=ExtResource("3_lp5xa")]
 position = Vector2(943, -144)
 
-[node name="TestNpc" parent="worldAnchor" instance=ExtResource("4_21uxx")]
-position = Vector2(303, -47)
-scale = Vector2(2, 2)
-myDialouge = {
-"Hello!": "???",
-"Hi?": "player"
-}
-
-[node name="TestNpc2" parent="worldAnchor" instance=ExtResource("4_21uxx")]
-position = Vector2(495, -48)
-scale = Vector2(-2, 2)
-myDialouge = {
-"so many colors": "#?<\":",
-"yeah....": "player"
-}
-
-[connection signal="new_conversation" from="worldAnchor/TestNpc" to="playerAnchor" method="updateConversation"]
-[connection signal="new_conversation" from="worldAnchor/TestNpc2" to="playerAnchor" method="updateConversation"]
+[node name="TestNpc" parent="." instance=ExtResource("4_21uxx")]
+position = Vector2(80, 32)

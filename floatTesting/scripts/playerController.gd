@@ -1,19 +1,23 @@
-extends CharacterBody2D
+extends Node2D
 
 #onready vars to be init at start 
 @onready var worldSpace : Node2D = get_tree().current_scene.get_child(1) # second child is world, first is player 
 
+#collision casts and cast arrays 
 @onready var floorMark : CollisionShape2D = $Area2D/floor
-@onready var wallMark : RayCast2D = $wallCast
-@onready var topCol : Node2D = $topColliders
-@onready var botCol : Node2D = $botColliders
-@onready var sprite : AnimatedSprite2D = $playerBody
+@onready var wallMark : RayCast2D = $CharacterBody2D/wallCast
+@onready var topCol : Node2D = $CharacterBody2D/topColliders
+@onready var botCol : Node2D = $CharacterBody2D/botColliders
+
+#sprites
+@onready var sprite : AnimatedSprite2D = $CharacterBody2D/playerBody
+@onready var interactionLabel : Sprite2D = $InteractionMarker
 
 # dialouge
-@onready var dialougeController : CanvasLayer = $UiController 
+@onready var dialougeController : CanvasLayer = $CharacterBody2D/UiController 
 
 #DEBUG
-@onready var coordText : RichTextLabel = $RichTextLabel
+@onready var coordText : RichTextLabel = $CharacterBody2D/RichTextLabel
 
 #basic traversal vars, for walking and grounding 
 var dir : int = 0
@@ -49,6 +53,7 @@ func _ready():
 
 	#ensure raycasts are enabled 
 	wallMark.enabled = true
+	interactionLabel.visible = false
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -58,6 +63,9 @@ func _process(delta):
 	#hot reload for debung 
 	if Input.is_action_just_pressed("ui_down"):
 		get_tree().reload_current_scene()
+	
+	if !dialougeController.talking: # set interaction marker invisible if we arent enganged in a conversation
+		interactionLabel.visible = false
 		
 func _physics_process(delta):
 	move(delta) # movement handler 
@@ -135,7 +143,7 @@ func initializeColArray():
 		topColArray.append(currentRay) # add it to the array of raycasts
 		currentRay.enabled = true # enable it
 		currentRay.target_position.y = -JUMPHEIGHT * 3 # set the target position to be arbitrarily big because i decided so?
-		
+
 # func -- checkUpCol
 # args -- none
 #
@@ -181,7 +189,7 @@ func checkDownCol():
 					var target = collider.get_parent().get_parent()
 					target.queue_free()
 					dialougeController.score += 1 #TODO -- hook this up to a score manager
-					dialougeController.speak({"woah" : "PLAYER"}, 0) #TODO -- hook this up to a manager too (placeholder though)
+					dialougeController.speak({"*poof*" : "enemy"}, 0) #TODO -- hook this up to a manager too (placeholder though)
 					
 		else: # not colliding 
 			if activeCollisions > 0:
@@ -190,7 +198,6 @@ func checkDownCol():
 				
 		if activeCollisions == 0: # no active collisions?
 			grounded = false # not on the ground! 
-		
 
 # func -- groundCollision
 # args -- area (target area 2d)
@@ -207,3 +214,8 @@ func groundCollision(area): # signal from feet
 func cancelCollision(area): # feet leaving signal 
 	if area.is_in_group("walls"): # NOT ON THE GROUND WAH
 		grounded = false 
+
+
+func updateConversation(conversation : Dictionary):
+	interactionLabel.visible = true
+	dialougeController.currentTalk = conversation

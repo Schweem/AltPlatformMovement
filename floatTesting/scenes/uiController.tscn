@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://dcr1tljqspujy"]
 
-[ext_resource type="Script" path="res://scenes/uiController.gd" id="1_6s1tb"]
+[ext_resource type="Script" path="res://scripts/uiController.gd" id="1_x0ija"]
 [ext_resource type="FontFile" uid="uid://b0mmbac6tyew6" path="res://Kenney Mini Square.ttf" id="1_xi8wu"]
 
 [node name="UiController" type="CanvasLayer"]
 follow_viewport_enabled = true
-script = ExtResource("1_6s1tb")
+script = ExtResource("1_x0ija")
 
 [node name="score" type="RichTextLabel" parent="."]
 texture_filter = 1

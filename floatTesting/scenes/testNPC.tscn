@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dus3ck8hjnhtf"]
+
+[ext_resource type="Script" path="res://scenes/dialougeController.gd" id="1_jpr4g"]
+[ext_resource type="Texture2D" uid="uid://clftk8qjvpur2" path="res://sprites/playerCharacter.png" id="2_7c4a2"]
+
+[node name="TestNpc" type="Node2D"]
+script = ExtResource("1_jpr4g")
+
+[node name="PlayerCharacter" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_7c4a2")
+flip_h = true
+
+[node name="speechCast" type="RayCast2D" parent="."]
+target_position = Vector2(-16, 0)

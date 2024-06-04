@@ -10,7 +10,6 @@ var facing : int = 1
 var canFlip : bool = true 
 var grounded : bool = false
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	dirRay.target_position.x = 16 * facing 
