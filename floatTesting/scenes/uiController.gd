@@ -13,10 +13,14 @@ var talking : bool = false
 var currentTalk : Dictionary = {"..." : "PLAYER",
 								".." : "PLAYER",
 								"im done. FEZ II is canceled. goodbye" : "Phill fish",
-								":(" : "PLAYER"
+								":(" : "PLAYER",
+								"I'm josh" : "josh"
 								}
 var breath : float = 0.1
 var advanceDelay : float = 0.5
+
+var colorDict : Dictionary = {} # store the dialouge colors of all the people we've met along the way 
+var starterColors : Array = [Color.GOLD, Color.FIREBRICK, Color.LIGHT_GREEN]
 
 @onready var dialougeLabel : RichTextLabel = $dialouge
 @onready var speakerLabel : RichTextLabel = $speaker
@@ -58,22 +62,20 @@ func toggleDialouge():
 # args -- conversation dictionary, start index (prob 0)
 #
 # Begin, progress, and end dialouge. Can change word and pause speed.
-func speak(conversation, interactions):
+func speak(conversation : Dictionary, interactions : int):
+	if interactions == 0:
+		assignColors(conversation)
 	talking = true # set talking true
-	dialougeBox.visible = true # enable the ui component 
-	speakerLabel.text = conversation.values()[interactions] + " :" # grab the speaker from conversation dict
-	
-	var actor : String = speakerLabel.text.split(" ")[0]
-	if actor == "PLAYER":
-		speakerLabel.modulate = Color(1,1,0)
-	else:
-		speakerLabel.modulate = Color(1,1,1)
+	dialougeBox.visible = true # enable the ui component
+	var actor : String = conversation.values()[interactions]
+	speakerLabel.push_color(colorDict[actor])
+	speakerLabel.append_text(actor + " :") # grab the speaker from conversation dict
 		
 	await get_tree().create_timer(advanceDelay).timeout # pause once done 
 	
 	for letter in conversation.keys()[interactions]: # iterate through each letter of the dialouge
 		if talking:
-			dialougeLabel.text += letter
+			dialougeLabel.append_text(letter)
 			await get_tree().create_timer(breath).timeout # timer for typeout effect 
 		else:
 			return # kill if talking is false 
@@ -82,7 +84,22 @@ func speak(conversation, interactions):
 	
 	if conversation.size() - 1 > interactions: # if there are more dialouges
 		interactions = interactions + 1 # increment interaction counter
-		dialougeLabel.text = "" # reset text
+		cleanUpLabels(speakerLabel, dialougeLabel)
 		speak(currentTalk, interactions) # start next one 
 	else:
+		cleanUpLabels(speakerLabel, dialougeLabel)
 		toggleDialouge() # otherwise turn it all off
+
+func assignColors(conversation : Dictionary):
+	var count : int = 0
+	for name in conversation.values():
+		if !colorDict.has(name):
+			if count <= starterColors.size():
+				colorDict[name] = starterColors[count]
+				count += 1
+	print(colorDict)
+	
+func cleanUpLabels(speaker : RichTextLabel, body : RichTextLabel):
+	speaker.pop() # pop current color off the stack for next assignment
+	speaker.remove_paragraph(0) # clean speaker
+	body.remove_paragraph(0) # clean body text

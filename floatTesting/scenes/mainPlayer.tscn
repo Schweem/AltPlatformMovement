@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://gynfq7upfxek"]
+[gd_scene load_steps=7 format=3 uid="uid://gynfq7upfxek"]
 
 [ext_resource type="Script" path="res://scripts/playerController.gd" id="1_c4xo6"]
 [ext_resource type="FontFile" uid="uid://b0mmbac6tyew6" path="res://Kenney Mini Square.ttf" id="2_fprvs"]
 [ext_resource type="Texture2D" uid="uid://clftk8qjvpur2" path="res://sprites/playerCharacter.png" id="2_g2e5p"]
+[ext_resource type="Script" path="res://scenes/cameraController.gd" id="2_hk5my"]
 [ext_resource type="PackedScene" uid="uid://dcr1tljqspujy" path="res://scenes/uiController.tscn" id="4_sci46"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0nhd1"]
@@ -24,6 +25,7 @@ script = ExtResource("1_c4xo6")
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
 position = Vector2(0, -48)
+script = ExtResource("2_hk5my")
 
 [node name="ColorRect" type="ColorRect" parent="CharacterBody2D/Camera2D"]
 z_index = -10
