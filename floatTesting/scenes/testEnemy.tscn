@@ -8,13 +8,13 @@ size = Vector2(16, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_817mj"]
 size = Vector2(16, 16)
 
-[node name="testEnemy" type="Node2D" groups=["enemy"]]
+[node name="testEnemy" type="Node2D"]
 position = Vector2(-105, -16)
 script = ExtResource("1_qqvn7")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["enemy"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" groups=["enemy"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 shape = SubResource("RectangleShape2D_1rrbh")
 
 [node name="ColorRect" type="ColorRect" parent="CharacterBody2D"]

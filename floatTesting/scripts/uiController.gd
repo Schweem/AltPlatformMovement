@@ -55,9 +55,8 @@ func toggleDialouge():
 			speak(currentTalk, interactions) 
 	else:
 		talking = false
+		cleanUpLabels(speakerLabel, dialougeLabel)
 		dialougeBox.visible = false
-		dialougeLabel.text = ""
-		speakerLabel.text = ""
 
 # func -- speak
 # args -- conversation dictionary, start index (prob 0)

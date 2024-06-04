@@ -173,12 +173,12 @@ func checkDownCol():
 			if collider != null:
 				
 				if collider.is_in_group("enemy"):
-					print('enemy')
 					worldSpace.position.y += JUMPHEIGHT
 					var target = collider
 					target.queue_free()
 					dialougeController.score += 1 #TODO -- hook this up to a score manager
-					dialougeController.speak({"*poof*" : "enemy"}, 0) #TODO -- hook this up to a manager too (placeholder though)
+					if !dialougeController.talking:
+						dialougeController.speak({"*poof*" : "enemy"}, 0) #TODO -- hook this up to a manager too (placeholder though)
 					break
 					
 				if collider.is_in_group("walls"): # with the walls + floor
