@@ -56,6 +56,17 @@ func onGround(area):
 		grounded = true 
 
 func offGround(area):
-	print('fuck')
+	print('fuck colliders')
 	if area.is_in_group("walls"):
+		grounded = false 
+
+
+func onSolidGround(body):
+	if body.is_in_group("walls"):
+		grounded = true 
+
+
+func offSolidGround(body):
+	print('fuck tilesets')
+	if body.is_in_group("walls"):
 		grounded = false 

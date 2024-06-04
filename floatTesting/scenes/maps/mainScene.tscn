@@ -1,12 +1,46 @@
-[gd_scene load_steps=6 format=3 uid="uid://d3urm7y1l36aj"]
+[gd_scene load_steps=8 format=3 uid="uid://d3urm7y1l36aj"]
 
 [ext_resource type="Script" path="res://scripts/gameController.gd" id="1_tsawv"]
 [ext_resource type="PackedScene" uid="uid://gynfq7upfxek" path="res://scenes/mainPlayer.tscn" id="2_mnd8r"]
 [ext_resource type="PackedScene" uid="uid://dna84xunvpmop" path="res://scenes/testEnemy.tscn" id="3_lp5xa"]
 [ext_resource type="PackedScene" uid="uid://dus3ck8hjnhtf" path="res://scenes/testNPC.tscn" id="4_21uxx"]
+[ext_resource type="Texture2D" uid="uid://dsqqwqdclqe2p" path="res://tilesets/bwOverhaulTest.png" id="5_1wn6s"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2bw08"]
-size = Vector2(40, 40)
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_naah8"]
+texture = ExtResource("5_1wn6s")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+1:1/0 = 0
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:1/0 = 0
+3:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:1/0/physics_layer_0/angular_velocity = 0.0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:2/0 = 0
+0:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:2/0/physics_layer_0/angular_velocity = 0.0
+1:2/0 = 0
+1:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:2/0/physics_layer_0/angular_velocity = 0.0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:2/0 = 0
+3:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:2/0/physics_layer_0/angular_velocity = 0.0
+3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:3/0 = 0
+2:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:3/0/physics_layer_0/angular_velocity = 0.0
+2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_r6e1w"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_naah8")
 
 [node name="sceneRoot" type="Node2D"]
 script = ExtResource("1_tsawv")
@@ -16,194 +50,17 @@ script = ExtResource("1_tsawv")
 [node name="worldAnchor" type="Node2D" parent="."]
 position = Vector2(1, 24)
 
-[node name="block7" type="Area2D" parent="worldAnchor" groups=["walls"]]
-position = Vector2(-40.9999, 17)
-scale = Vector2(19.12, 1.01843)
-
-[node name="ColorRect" type="ColorRect" parent="worldAnchor/block7"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_right = 40.0
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="worldAnchor/block7"]
-position = Vector2(20, 20)
-shape = SubResource("RectangleShape2D_2bw08")
-
-[node name="block" type="Area2D" parent="worldAnchor" groups=["walls"]]
-position = Vector2(783, 17)
-scale = Vector2(4.4, 1.00917)
-
-[node name="ColorRect" type="ColorRect" parent="worldAnchor/block"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_right = 40.0
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="worldAnchor/block"]
-position = Vector2(20, 20)
-shape = SubResource("RectangleShape2D_2bw08")
-
-[node name="block6" type="Area2D" parent="worldAnchor" groups=["walls"]]
-position = Vector2(183, -24)
-scale = Vector2(4.16, -0.160001)
-
-[node name="ColorRect" type="ColorRect" parent="worldAnchor/block6"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_right = 40.0
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="worldAnchor/block6"]
-position = Vector2(20, 20)
-shape = SubResource("RectangleShape2D_2bw08")
-
-[node name="block5" type="Area2D" parent="worldAnchor" groups=["walls"]]
-position = Vector2(-81, 17)
-scale = Vector2(1, -11.56)
-
-[node name="ColorRect" type="ColorRect" parent="worldAnchor/block5"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_right = 40.0
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="worldAnchor/block5"]
-position = Vector2(20, 20)
-shape = SubResource("RectangleShape2D_2bw08")
-
-[node name="block8" type="Area2D" parent="worldAnchor" groups=["walls"]]
-position = Vector2(366.609, -55.9999)
-scale = Vector2(2.60977, 0.199999)
-
-[node name="ColorRect" type="ColorRect" parent="worldAnchor/block8"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_right = 40.0
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="worldAnchor/block8"]
-position = Vector2(20, 20)
-shape = SubResource("RectangleShape2D_2bw08")
-
-[node name="block9" type="Area2D" parent="worldAnchor" groups=["walls"]]
-position = Vector2(711, -9)
-scale = Vector2(0.33091, 0.84)
-
-[node name="ColorRect" type="ColorRect" parent="worldAnchor/block9"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_right = 40.0
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="worldAnchor/block9"]
-position = Vector2(20, 20)
-shape = SubResource("RectangleShape2D_2bw08")
-
-[node name="block2" type="Area2D" parent="worldAnchor" groups=["walls"]]
-position = Vector2(471, -32)
-scale = Vector2(2.60977, 0.199999)
-
-[node name="ColorRect" type="ColorRect" parent="worldAnchor/block2"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_right = 40.0
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="worldAnchor/block2"]
-position = Vector2(20, 20)
-shape = SubResource("RectangleShape2D_2bw08")
-
-[node name="block3" type="Area2D" parent="worldAnchor" groups=["walls"]]
-position = Vector2(847, -16)
-scale = Vector2(6, 0.16)
-
-[node name="ColorRect" type="ColorRect" parent="worldAnchor/block3"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_right = 40.0
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="worldAnchor/block3"]
-position = Vector2(20, 20)
-shape = SubResource("RectangleShape2D_2bw08")
-
-[node name="block4" type="Area2D" parent="worldAnchor" groups=["walls"]]
-position = Vector2(767, -120)
-scale = Vector2(8.08, 0.186005)
-
-[node name="ColorRect" type="ColorRect" parent="worldAnchor/block4"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_right = 40.0
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="worldAnchor/block4"]
-position = Vector2(20, 20)
-shape = SubResource("RectangleShape2D_2bw08")
-
 [node name="testEnemy" parent="worldAnchor" instance=ExtResource("3_lp5xa")]
 position = Vector2(519, -12)
 
 [node name="testEnemy2" parent="worldAnchor" instance=ExtResource("3_lp5xa")]
-position = Vector2(223, -48)
-
-[node name="testEnemy3" parent="worldAnchor" instance=ExtResource("3_lp5xa")]
-position = Vector2(967, -39)
+position = Vector2(155, -11)
 
 [node name="testEnemy4" parent="worldAnchor" instance=ExtResource("3_lp5xa")]
-position = Vector2(119, -8)
-
-[node name="testEnemy5" parent="worldAnchor" instance=ExtResource("3_lp5xa")]
-position = Vector2(943, -144)
+position = Vector2(87, -12)
 
 [node name="TestNpc" parent="worldAnchor" instance=ExtResource("4_21uxx")]
-position = Vector2(303, -47)
+position = Vector2(343, -32)
 scale = Vector2(2, 2)
 myDialouge = {
 "Hello!": "???",
@@ -211,12 +68,18 @@ myDialouge = {
 }
 
 [node name="TestNpc2" parent="worldAnchor" instance=ExtResource("4_21uxx")]
-position = Vector2(495, -48)
+position = Vector2(391, -32)
 scale = Vector2(-2, 2)
 myDialouge = {
 "so many colors": "#?<\":",
 "yeah....": "player"
 }
+
+[node name="TileMap" type="TileMap" parent="worldAnchor" groups=["walls"]]
+texture_filter = 1
+tile_set = SubResource("TileSet_r6e1w")
+format = 2
+layer_0/tile_data = PackedInt32Array(65528, 131072, 3, 65529, 131072, 3, 65530, 131072, 3, 65531, 131072, 3, 65532, 131072, 3, 65533, 131072, 3, 65534, 131072, 3, 65535, 131072, 3, 0, 131072, 3, 1, 131072, 3, 2, 131072, 3, 3, 131072, 3, 4, 131072, 3, 5, 131072, 3, 6, 131072, 3, 7, 131072, 3, 8, 131072, 3, 9, 131072, 3, 10, 131072, 3, 11, 131072, 3, 12, 131072, 3, 13, 131072, 3, 14, 131072, 3, 15, 131072, 3, -65520, 196608, 1, -65519, 131072, 3, -65518, 131072, 3, -65517, 131072, 3, -65516, 131072, 3, -65515, 131072, 3, -65514, 131072, 3, -65513, 131072, 3, -65512, 131072, 3, -65511, 131072, 3, -65510, 131072, 3, -65509, 131072, 3, -65508, 65536, 1, 29, 65536, 1, 65566, 131072, 3, 65567, 131072, 3, 65568, 131072, 3, 65569, 131072, 3, 65570, 131072, 3, 65571, 131072, 3, 65572, 131072, 3, 65573, 131072, 3, 65574, 131072, 3, 65575, 131072, 3, 65576, 131072, 3, 65577, 131072, 3, 65578, 131072, 3, 65579, 131072, 3, 65580, 131072, 3, 65581, 131072, 3, 65582, 131072, 3, 47, 196608, 2, -65489, 196608, 2, -131025, 196608, 2, -196561, 196608, 2, -262097, 196608, 2, -327633, 196608, 2, -393169, 196608, 2, -458705, 196608, 2, -524241, 196608, 2, -589777, 196608, 1, -9, 65536, 2, -65545, 65536, 2, -131081, 65536, 2, -196617, 65536, 2, -262153, 65536, 2, -327689, 65536, 2, -393225, 65536, 1)
 
 [connection signal="new_conversation" from="worldAnchor/TestNpc" to="playerAnchor" method="updateConversation"]
 [connection signal="new_conversation" from="worldAnchor/TestNpc2" to="playerAnchor" method="updateConversation"]

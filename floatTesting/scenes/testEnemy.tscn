@@ -6,7 +6,7 @@
 size = Vector2(16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_817mj"]
-size = Vector2(16, 18)
+size = Vector2(16, 16)
 
 [node name="testEnemy" type="Node2D"]
 position = Vector2(-105, -16)
@@ -27,13 +27,13 @@ color = Color(1, 0.352941, 0.411765, 1)
 [node name="wallCast" type="RayCast2D" parent="CharacterBody2D"]
 target_position = Vector2(16, 0)
 collide_with_areas = true
-collide_with_bodies = false
 
 [node name="feet" type="Area2D" parent="CharacterBody2D" groups=["enemy"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/feet"]
-position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_817mj")
 
 [connection signal="area_entered" from="CharacterBody2D/feet" to="." method="onGround"]
 [connection signal="area_exited" from="CharacterBody2D/feet" to="." method="offGround"]
+[connection signal="body_entered" from="CharacterBody2D/feet" to="." method="onSolidGround"]
+[connection signal="body_exited" from="CharacterBody2D/feet" to="." method="offSolidGround"]

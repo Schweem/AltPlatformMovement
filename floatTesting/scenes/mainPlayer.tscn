@@ -37,11 +37,11 @@ script = ExtResource("2_yppjg")
 
 [node name="ColorRect" type="ColorRect" parent="CharacterBody2D/Camera2D"]
 z_index = -10
+texture_filter = 1
 offset_left = -160.0
 offset_top = -120.0
 offset_right = 160.0
 offset_bottom = 120.0
-color = Color(0.160784, 0.14902, 0.12549, 1)
 
 [node name="playerBody" type="AnimatedSprite2D" parent="CharacterBody2D"]
 texture_filter = 1
@@ -58,13 +58,11 @@ collide_with_areas = true
 position = Vector2(8, 0)
 target_position = Vector2(0, -16)
 collide_with_areas = true
-collide_with_bodies = false
 
 [node name="ceillingCast2" type="RayCast2D" parent="CharacterBody2D/topColliders"]
 position = Vector2(-8, 0)
 target_position = Vector2(0, -16.06)
 collide_with_areas = true
-collide_with_bodies = false
 
 [node name="botColliders" type="Node2D" parent="CharacterBody2D"]
 
@@ -72,18 +70,15 @@ collide_with_bodies = false
 position = Vector2(-8, 0)
 target_position = Vector2(0, 8)
 collide_with_areas = true
-collide_with_bodies = false
 
 [node name="floorCheck2" type="RayCast2D" parent="CharacterBody2D/botColliders"]
 position = Vector2(8, 0)
 target_position = Vector2(0, 8)
 collide_with_areas = true
-collide_with_bodies = false
 
 [node name="floorCheck3" type="RayCast2D" parent="CharacterBody2D/botColliders"]
 target_position = Vector2(0, 8)
 collide_with_areas = true
-collide_with_bodies = false
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CharacterBody2D"]
 visible = false
