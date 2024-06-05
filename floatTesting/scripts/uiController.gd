@@ -26,6 +26,7 @@ var colorCount : int = 0
 @onready var dialougeLabel : RichTextLabel = $dialouge
 @onready var speakerLabel : RichTextLabel = $speaker
 @onready var dialougeBox : ColorRect = $lowerMargin
+var canInteract : bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -42,8 +43,11 @@ func _ready():
 func _process(delta):
 	updateUI()
 	
-	if Input.is_action_just_pressed("interact") and !talking: #activate out here kill it inside 
-		toggleDialouge()
+	if canInteract:
+		if Input.is_action_just_pressed("interact") and !talking: #activate out here kill it inside
+			toggleDialouge()
+		else:
+			pass
 
 func updateUI():
 	scoreLabel.text = "SCORE:\n %05d" % [score]
@@ -92,6 +96,7 @@ func speak(conversation : Dictionary, interactions : int):
 		else:
 			cleanUpLabels(speakerLabel, dialougeLabel)
 			toggleDialouge() # otherwise turn it all off
+			canInteract = false
 	else:
 		pass
 		print('no words')

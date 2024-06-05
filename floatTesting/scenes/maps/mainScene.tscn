@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://d3urm7y1l36aj"]
+[gd_scene load_steps=9 format=3 uid="uid://d3urm7y1l36aj"]
 
 [ext_resource type="Script" path="res://scripts/gameController.gd" id="1_tsawv"]
+[ext_resource type="PackedScene" uid="uid://dcr1tljqspujy" path="res://scenes/uiController.tscn" id="2_hksc7"]
 [ext_resource type="PackedScene" uid="uid://gynfq7upfxek" path="res://scenes/mainPlayer.tscn" id="2_mnd8r"]
 [ext_resource type="PackedScene" uid="uid://dna84xunvpmop" path="res://scenes/testEnemy.tscn" id="3_lp5xa"]
 [ext_resource type="PackedScene" uid="uid://dus3ck8hjnhtf" path="res://scenes/testNPC.tscn" id="4_21uxx"]
@@ -45,6 +46,8 @@ sources/0 = SubResource("TileSetAtlasSource_naah8")
 [node name="sceneRoot" type="Node2D"]
 script = ExtResource("1_tsawv")
 
+[node name="UiController" parent="." instance=ExtResource("2_hksc7")]
+
 [node name="playerAnchor" parent="." instance=ExtResource("2_mnd8r")]
 
 [node name="worldAnchor" type="Node2D" parent="."]
@@ -59,14 +62,6 @@ position = Vector2(155, -11)
 [node name="testEnemy4" parent="worldAnchor" instance=ExtResource("3_lp5xa")]
 position = Vector2(87, -12)
 
-[node name="TestNpc" parent="worldAnchor" instance=ExtResource("4_21uxx")]
-position = Vector2(343, -32)
-scale = Vector2(2, 2)
-myDialouge = {
-"Hello!": "???",
-"Hi?": "player"
-}
-
 [node name="TestNpc2" parent="worldAnchor" instance=ExtResource("4_21uxx")]
 position = Vector2(391, -32)
 scale = Vector2(-2, 2)
@@ -75,11 +70,28 @@ myDialouge = {
 "yeah....": "player"
 }
 
+[node name="TestNpc3" parent="worldAnchor" instance=ExtResource("4_21uxx")]
+position = Vector2(735, 0)
+scale = Vector2(2, 2)
+myDialouge = {
+"...": "player",
+"100th": "100th"
+}
+
+[node name="TestNpc" parent="worldAnchor" instance=ExtResource("4_21uxx")]
+position = Vector2(343, -32)
+scale = Vector2(2, 2)
+myDialouge = {
+"Hello!": "???",
+"Hi?": "player"
+}
+
 [node name="TileMap" type="TileMap" parent="worldAnchor" groups=["walls"]]
 texture_filter = 1
 tile_set = SubResource("TileSet_r6e1w")
 format = 2
-layer_0/tile_data = PackedInt32Array(65528, 131072, 3, 65529, 131072, 3, 65530, 131072, 3, 65531, 131072, 3, 65532, 131072, 3, 65533, 131072, 3, 65534, 131072, 3, 65535, 131072, 3, 0, 131072, 3, 1, 131072, 3, 2, 131072, 3, 3, 131072, 3, 4, 131072, 3, 5, 131072, 3, 6, 131072, 3, 7, 131072, 3, 8, 131072, 3, 9, 131072, 3, 10, 131072, 3, 11, 131072, 3, 12, 131072, 3, 13, 131072, 3, 14, 131072, 3, 15, 131072, 3, -65520, 196608, 1, -65519, 131072, 3, -65518, 131072, 3, -65517, 131072, 3, -65516, 131072, 3, -65515, 131072, 3, -65514, 131072, 3, -65513, 131072, 3, -65512, 131072, 3, -65511, 131072, 3, -65510, 131072, 3, -65509, 131072, 3, -65508, 65536, 1, 29, 65536, 1, 65566, 131072, 3, 65567, 131072, 3, 65568, 131072, 3, 65569, 131072, 3, 65570, 131072, 3, 65571, 131072, 3, 65572, 131072, 3, 65573, 131072, 3, 65574, 131072, 3, 65575, 131072, 3, 65576, 131072, 3, 65577, 131072, 3, 65578, 131072, 3, 65579, 131072, 3, 65580, 131072, 3, 65581, 131072, 3, 65582, 131072, 3, 47, 196608, 2, -65489, 196608, 2, -131025, 196608, 2, -196561, 196608, 2, -262097, 196608, 2, -327633, 196608, 2, -393169, 196608, 2, -458705, 196608, 2, -524241, 196608, 2, -589777, 196608, 1, -9, 65536, 2, -65545, 65536, 2, -131081, 65536, 2, -196617, 65536, 2, -262153, 65536, 2, -327689, 65536, 2, -393225, 65536, 1, -393228, 131072, 3, -393234, 131072, 3, -393235, 131072, 3, -393231, 131072, 3, -589775, 131072, 3, -589774, 131072, 3, -589770, 131072, 3, -589769, 131072, 3, -589766, 131072, 3, -458770, 0, 1, -458761, 0, 0, -655313, 0, 0, -655306, 0, 0, -655310, 0, 2, -458764, 0, 2)
+layer_0/tile_data = PackedInt32Array(65528, 131072, 3, 65529, 131072, 3, 65530, 131072, 3, 65531, 131072, 3, 65532, 131072, 3, 65533, 131072, 3, 65534, 131072, 3, 65535, 131072, 3, 0, 131072, 3, 1, 131072, 3, 2, 131072, 3, 3, 131072, 3, 4, 131072, 3, 5, 131072, 3, 6, 131072, 3, 7, 131072, 3, 8, 131072, 3, 9, 131072, 3, 10, 131072, 3, 11, 131072, 3, 12, 131072, 3, 13, 131072, 3, 14, 131072, 3, 15, 131072, 3, -65520, 196608, 1, -65519, 131072, 3, -65518, 131072, 3, -65517, 131072, 3, -65516, 131072, 3, -65515, 131072, 3, -65514, 131072, 3, -65513, 131072, 3, -65512, 131072, 3, -65511, 131072, 3, -65510, 131072, 3, -65509, 131072, 3, -65508, 65536, 1, 29, 65536, 1, 65566, 131072, 3, 65567, 131072, 3, 65568, 131072, 3, 65569, 131072, 3, 65570, 131072, 3, 65571, 131072, 3, 65572, 131072, 3, 65573, 131072, 3, 65574, 131072, 3, 65575, 131072, 3, 65576, 131072, 3, 65577, 131072, 3, 65578, 131072, 3, 65579, 131072, 3, 65580, 131072, 3, 65581, 131072, 3, 65582, 131072, 3, 47, 196608, 2, -65489, 196608, 2, -131025, 196608, 2, -196561, 196608, 2, -262097, 196608, 2, -327633, 196608, 2, -393169, 196608, 2, -458705, 196608, 2, -524241, 196608, 2, -589777, 196608, 1, -9, 65536, 2, -65545, 65536, 2, -131081, 65536, 2, -196617, 65536, 2, -262153, 65536, 2, -327689, 65536, 2, -393225, 65536, 1, -393228, 131072, 3, -393234, 131072, 3, -393235, 131072, 3, -393231, 131072, 3, -589775, 131072, 3, -589774, 131072, 3, -589770, 131072, 3, -589769, 131072, 3, -589766, 131072, 3, -458770, 0, 1, -458761, 0, 0, -655313, 0, 0, -655306, 0, 0, -655310, 0, 2, -458764, 0, 2, -196616, 131072, 3, -196615, 131072, 3, -196614, 65536, 1, -131078, 65536, 2, -65542, 65536, 2, -6, 65536, 2, -393226, 131072, 3, -393227, 131072, 3, -393229, 131072, 3, -393230, 131072, 3, -393232, 131072, 3, -393233, 131072, 3, -589776, 131072, 3, -589773, 131072, 3, -589772, 131072, 3, -589771, 131072, 3, -589768, 131072, 3, -589767, 131072, 3, 37, 0, 1, -131055, 0, 1, -131045, 0, 0, 36, 0, 0, 41, 0, 2, -65532, 0, 2, -3, 0, 1, -65533, 0, 1, -65523, 0, 1)
 
-[connection signal="new_conversation" from="worldAnchor/TestNpc" to="playerAnchor" method="updateConversation"]
 [connection signal="new_conversation" from="worldAnchor/TestNpc2" to="playerAnchor" method="updateConversation"]
+[connection signal="new_conversation" from="worldAnchor/TestNpc3" to="playerAnchor" method="updateConversation"]
+[connection signal="new_conversation" from="worldAnchor/TestNpc" to="playerAnchor" method="updateConversation"]

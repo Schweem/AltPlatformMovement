@@ -8,9 +8,9 @@ extends Node2D
 @onready var showName : bool = false
 var charName : String #TODO -- hook this up to dictionary and get color
 
-signal new_conversation(conversation : Dictionary)
-signal clear_conversation(conversation : Dictionary)
+@onready var dialougeController : CanvasLayer = get_tree().current_scene.get_child(0)
 
+signal new_conversation(conversation : Dictionary)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,15 +18,16 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if speechCheck.is_colliding():
-		if speechCheck.get_collider().is_in_group("player"):
+	if self.speechCheck.is_colliding():
+		if self.speechCheck.get_collider().is_in_group("player"):
+			dialougeController.canInteract = true
 			new_conversation.emit(myDialouge)
 			if !showName:
 				showCharName()
 		else:
 			pass
 	else:
-		clear_conversation.emit({})
+		pass
 
 func showCharName():
 	findMyName()

@@ -1,7 +1,10 @@
 extends Node2D
 
 #onready vars to be init at start 
-@onready var worldSpace : Node2D = get_tree().current_scene.get_child(1) # second child is world, first is player 
+@onready var worldSpace : Node2D = get_tree().current_scene.get_child(2) # second child is world, first is player 
+
+# dialouge
+@onready var dialougeController : CanvasLayer = get_tree().current_scene.get_child(0)
 
 #collision casts and cast arrays 
 @onready var wallMark : RayCast2D = $CharacterBody2D/wallCast
@@ -11,9 +14,6 @@ extends Node2D
 #sprites
 @onready var sprite : AnimatedSprite2D = $CharacterBody2D/playerBody
 @onready var interactionLabel : Sprite2D = $InteractionMarker
-
-# dialouge
-@onready var dialougeController : CanvasLayer = $CharacterBody2D/UiController
 
 #DEBUG
 @onready var coordText : RichTextLabel = $CharacterBody2D/RichTextLabel
@@ -65,6 +65,7 @@ func _process(delta):
 	
 	if !dialougeController.talking: # set interaction marker invisible if we arent enganged in a conversation
 		interactionLabel.visible = false
+		dialougeController.canInteract = false
 		
 		
 func _physics_process(delta):

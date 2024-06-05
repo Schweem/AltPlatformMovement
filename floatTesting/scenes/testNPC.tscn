@@ -17,12 +17,13 @@ position = Vector2(0, -1)
 target_position = Vector2(-16, 0)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-visible = false
+z_index = 2
 texture_filter = 1
 offset_left = -8.0
 offset_top = -20.0
 offset_right = 48.0
 offset_bottom = -8.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("3_51nql")
 theme_override_font_sizes/normal_font_size = 8
 text = "NAME"
