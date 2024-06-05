@@ -26,12 +26,13 @@ func _physics_process(delta):
 func handleDir(delta):
 	if dirRay != null:
 		if dirRay.is_colliding():
-			if dirRay.get_collider().is_in_group("walls") and canFlip:
-				facing = -facing
-				dirRay.target_position = -dirRay.target_position
-				canFlip = false
-			else:
-				pass
+			if dirRay.get_collider() != null:
+				if dirRay.get_collider().is_in_group("walls") and canFlip:
+					facing = -facing
+					dirRay.target_position = -dirRay.target_position
+					canFlip = false
+				else:
+					pass
 		else:
 			pass
 

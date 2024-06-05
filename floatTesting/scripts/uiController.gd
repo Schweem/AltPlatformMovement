@@ -56,6 +56,7 @@ func toggleDialouge():
 	else:
 		talking = false
 		cleanUpLabels(speakerLabel, dialougeLabel)
+		currentTalk = {}
 		dialougeBox.visible = false
 
 # func -- speak
@@ -63,33 +64,37 @@ func toggleDialouge():
 #
 # Begin, progress, and end dialouge. Can change word and pause speed.
 func speak(conversation : Dictionary, interactions : int):
-	if interactions == 0:
-		assignColors(conversation)
-	talking = true # set talking true
-	dialougeBox.visible = true # enable the ui component
-	
-	var actor : String = conversation.values()[interactions]
-	speakerLabel.push_color(colorDict[actor])
-	speakerLabel.append_text(actor + " :") # grab the speaker from conversation dict
-	
-	await get_tree().create_timer(advanceDelay).timeout # pause once done 
-	
-	for letter in conversation.keys()[interactions]: # iterate through each letter of the dialouge
-		if talking:
-			dialougeLabel.append_text(letter)
-			await get_tree().create_timer(breath).timeout # timer for typeout effect 
+	if currentTalk != {}:
+		if interactions == 0:
+			assignColors(conversation)
+		talking = true # set talking true
+		dialougeBox.visible = true # enable the ui component
+		
+		var actor : String = conversation.values()[interactions]
+		speakerLabel.push_color(colorDict[actor])
+		speakerLabel.append_text(actor + " :") # grab the speaker from conversation dict
+		
+		await get_tree().create_timer(advanceDelay).timeout # pause once done 
+		
+		for letter in conversation.keys()[interactions]: # iterate through each letter of the dialouge
+			if talking:
+				dialougeLabel.append_text(letter)
+				await get_tree().create_timer(breath).timeout # timer for typeout effect 
+			else:
+				return # kill if talking is false 
+				
+		await get_tree().create_timer(advanceDelay).timeout # pause once done
+		
+		if conversation.size() - 1 > interactions: # if there are more dialouges
+			interactions = interactions + 1 # increment interaction counter
+			cleanUpLabels(speakerLabel, dialougeLabel)
+			speak(currentTalk, interactions) # start next one 
 		else:
-			return # kill if talking is false 
-			
-	await get_tree().create_timer(advanceDelay).timeout # pause once done
-	
-	if conversation.size() - 1 > interactions: # if there are more dialouges
-		interactions = interactions + 1 # increment interaction counter
-		cleanUpLabels(speakerLabel, dialougeLabel)
-		speak(currentTalk, interactions) # start next one 
+			cleanUpLabels(speakerLabel, dialougeLabel)
+			toggleDialouge() # otherwise turn it all off
 	else:
-		cleanUpLabels(speakerLabel, dialougeLabel)
-		toggleDialouge() # otherwise turn it all off
+		pass
+		print('no words')
 
 # func -- assignColors
 # args -- conversation dictionary to assign name colors to

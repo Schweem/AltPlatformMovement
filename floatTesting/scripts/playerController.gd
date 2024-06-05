@@ -13,7 +13,7 @@ extends Node2D
 @onready var interactionLabel : Sprite2D = $InteractionMarker
 
 # dialouge
-@onready var dialougeController : CanvasLayer = $CharacterBody2D/UiController 
+@onready var dialougeController : CanvasLayer = $CharacterBody2D/UiController
 
 #DEBUG
 @onready var coordText : RichTextLabel = $CharacterBody2D/RichTextLabel
@@ -65,6 +65,7 @@ func _process(delta):
 	
 	if !dialougeController.talking: # set interaction marker invisible if we arent enganged in a conversation
 		interactionLabel.visible = false
+		
 		
 func _physics_process(delta):
 	move(delta) # movement handler 
@@ -173,15 +174,15 @@ func checkDownCol():
 			if collider != null:
 				
 				if collider.is_in_group("enemy"):
-					worldSpace.position.y += JUMPHEIGHT
 					var target = collider
+					worldSpace.position.y += JUMPHEIGHT
 					target.queue_free()
 					dialougeController.score += 1 #TODO -- hook this up to a score manager
 					if !dialougeController.talking:
 						dialougeController.speak({"*poof*" : "enemy"}, 0) #TODO -- hook this up to a manager too (placeholder though)
 					break
 					
-				if collider.is_in_group("walls"): # with the walls + floor
+				elif collider.is_in_group("walls"): # with the walls + floor
 					var distance = floor(position.y - botCheckRay.get_collision_point().y) # calculate distance to point
 					
 					if distance < 0: # more than 0?
