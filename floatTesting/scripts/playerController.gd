@@ -99,7 +99,7 @@ func move(delta):
 	dir = Input.get_axis("ui_left", "ui_right")
 	
 	if dir != 0: #dont update if zero
-		wallMark.target_position.x = 16 * dir # update raycast direction
+		wallMark.target_position.x = 6 * dir # update raycast direction
 		sprite.scale.x = dir
 		
 	if wallMark.is_colliding():

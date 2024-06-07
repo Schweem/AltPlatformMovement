@@ -49,7 +49,7 @@ sprite_frames = SubResource("SpriteFrames_0nhd1")
 animation = &"idle"
 
 [node name="wallCast" type="RayCast2D" parent="CharacterBody2D"]
-target_position = Vector2(16, 0)
+target_position = Vector2(10, 0)
 collide_with_areas = true
 
 [node name="topColliders" type="Node2D" parent="CharacterBody2D"]
