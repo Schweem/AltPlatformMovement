@@ -23,6 +23,7 @@ var dir : int = 0
 var grounded : bool = false
 var theGround : float = 0
 var jumpReady : bool  = false
+var moving : bool = false
 
 #constants 
 const SPEED : float = 100.0
@@ -47,6 +48,8 @@ func _ready():
 	assert(topCol)
 	assert(botCol)
 	
+	sprite.play("idle")
+	
 	if topCol:
 		initializeColArray()
 
@@ -69,6 +72,7 @@ func _process(delta):
 		
 		
 func _physics_process(delta):
+	animate()
 	move(delta) # movement handler 
 	checkUpCol() # check for collisions above
 	checkDownCol() #check for the floor 
@@ -105,12 +109,19 @@ func move(delta):
 	if wallMark.is_colliding():
 		if wallMark.get_collider != null:
 			if wallMark.get_collider().is_in_group("walls"):
+				sprite.play("idle")
 				return 
 		else:
 			pass
 	else:
 		# move the world 
-		worldSpace.position.x += -dir * SPEED * delta 
+		worldSpace.position.x += -dir * SPEED * delta
+
+func animate():
+	if dir != 0:
+		sprite.play("walk")
+	if dir == 0:
+		sprite.play("idle")
 
 # func -- jump
 # args -- jump position, delta from physics proccess 

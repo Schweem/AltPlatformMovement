@@ -28,8 +28,14 @@ var colorCount : int = 0
 @onready var dialougeBox : ColorRect = $lowerMargin
 var canInteract : bool
 
+signal togglePause
+@onready var pauseIcon : Node2D = $pause
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	process_mode = Node.PROCESS_MODE_ALWAYS # so we can do pause menu 
+	pauseIcon.visible = false
+	
 	#UI
 	scoreLabel.text = "SCORE:\n %05d" % [score]
 	levelLabel.text = "WORLD:\n %d - %d" % [level, region]
@@ -42,6 +48,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	updateUI()
+	
+	if Input.is_action_just_pressed("pause"):
+		togglePause.emit()
 	
 	if canInteract:
 		if Input.is_action_just_pressed("interact") and !talking: #activate out here kill it inside
@@ -124,3 +133,8 @@ func cleanUpLabels(speaker : RichTextLabel, body : RichTextLabel):
 	speaker.pop() # pop current color off the stack for next assignment
 	speaker.remove_paragraph(0) # clean speaker
 	body.remove_paragraph(0) # clean body text
+
+
+func _on_toggle_pause():
+	pauseIcon.visible = !pauseIcon.visible
+	get_tree().paused = !get_tree().paused

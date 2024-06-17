@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://gynfq7upfxek"]
+[gd_scene load_steps=10 format=3 uid="uid://gynfq7upfxek"]
 
 [ext_resource type="Script" path="res://scripts/playerController.gd" id="1_c4xo6"]
 [ext_resource type="FontFile" uid="uid://b0mmbac6tyew6" path="res://Kenney Mini Square.ttf" id="2_fprvs"]
 [ext_resource type="Texture2D" uid="uid://clftk8qjvpur2" path="res://sprites/playerCharacter.png" id="2_g2e5p"]
 [ext_resource type="Script" path="res://scripts/cameraController.gd" id="2_yppjg"]
+[ext_resource type="Texture2D" uid="uid://rr0qv50ms10t" path="res://sprites/playerIdle2.png" id="4_5y1ek"]
+[ext_resource type="Texture2D" uid="uid://c4adiijsk8t68" path="res://sprites/playerStep2.png" id="4_crmuy"]
 [ext_resource type="Texture2D" uid="uid://cdcxjkud3x20n" path="res://sprites/interactionMarker.png" id="6_5blhr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7rh1f"]
@@ -14,10 +16,24 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_g2e5p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_5y1ek")
 }],
 "loop": true,
 "name": &"idle",
-"speed": 5.0
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_crmuy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_g2e5p")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 4.0
 }]
 
 [node name="playerAnchor" type="Node2D" groups=["player"]]
@@ -47,6 +63,7 @@ offset_bottom = 120.0
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_0nhd1")
 animation = &"idle"
+frame_progress = 0.292908
 
 [node name="wallCast" type="RayCast2D" parent="CharacterBody2D"]
 target_position = Vector2(10, 0)
