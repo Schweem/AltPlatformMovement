@@ -41,6 +41,8 @@ var jumpTarget : float = JUMPHEIGHT
 var coyoteTime : float = 0.1
 @onready var baseCoyoteTime : float = coyoteTime
 
+var lockedIn : bool = false #mirror var for talking in the UI controller 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	assert(worldSpace) #ensure link to worldspace
@@ -69,6 +71,12 @@ func _process(delta):
 	if !dialougeController.talking: # set interaction marker invisible if we arent enganged in a conversation
 		interactionLabel.visible = false
 		dialougeController.canInteract = false
+		
+	if dialougeController.talking == true:
+		lockedIn = true
+	else:
+		lockedIn = false
+		
 		
 		
 func _physics_process(delta):
@@ -99,8 +107,9 @@ func handleGravity(delta):
 # moves the world inverse to the player in that direction	
 func move(delta):
 	coordText.text = str(position)
-	# grab movement direction 
-	dir = Input.get_axis("ui_left", "ui_right")
+	# grab movement direction
+	if !lockedIn: # if not talking 
+		dir = Input.get_axis("ui_left", "ui_right")
 	
 	if dir != 0: #dont update if zero
 		wallMark.target_position.x = 6 * dir # update raycast direction
@@ -114,13 +123,18 @@ func move(delta):
 		else:
 			pass
 	else:
-		# move the world 
-		worldSpace.position.x += -dir * SPEED * delta
+		if !lockedIn: #if not talking
+			# move the world 
+			worldSpace.position.x += -dir * SPEED * delta
 
+# func -- animate
+# args -- NONE 
+#
+# Simple animation state management. #TODO USE A STATE MACHINE 
 func animate():
 	if dir != 0:
 		sprite.play("walk")
-	if dir == 0:
+	if dir == 0 or lockedIn:
 		sprite.play("idle")
 
 # func -- jump
@@ -190,8 +204,8 @@ func checkDownCol():
 					worldSpace.position.y += JUMPHEIGHT
 					target.queue_free()
 					dialougeController.score += 1 #TODO -- hook this up to a score manager
-					if !dialougeController.talking:
-						dialougeController.speak({"*poof*" : "enemy"}, 0) #TODO -- hook this up to a manager too (placeholder though)
+					#if !dialougeController.talking:
+						#dialougeController.speak({"*poof*" : "enemy"}, 0) #TODO -- hook this up to a manager too (placeholder though)
 					break
 					
 				elif collider.is_in_group("walls"): # with the walls + floor

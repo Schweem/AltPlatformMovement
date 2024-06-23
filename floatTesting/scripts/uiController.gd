@@ -26,10 +26,13 @@ var colorCount : int = 0
 @onready var dialougeLabel : RichTextLabel = $dialouge
 @onready var speakerLabel : RichTextLabel = $speaker
 @onready var dialougeBox : ColorRect = $lowerMargin
+@onready var advanceIcon : RichTextLabel = $advance
 var canInteract : bool
 
 signal togglePause
 @onready var pauseIcon : Node2D = $pause
+
+signal advanceConvo
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -48,6 +51,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	updateUI()
+	advanceIcon.visible = dialougeBox.visible
 	
 	if Input.is_action_just_pressed("pause"):
 		togglePause.emit()
@@ -55,6 +59,8 @@ func _process(delta):
 	if canInteract:
 		if Input.is_action_just_pressed("interact") and !talking: #activate out here kill it inside
 			toggleDialouge()
+		elif Input.is_action_just_pressed("interact") and talking:
+			advanceConvo.emit()
 		else:
 			pass
 
@@ -95,8 +101,11 @@ func speak(conversation : Dictionary, interactions : int):
 				await get_tree().create_timer(breath).timeout # timer for typeout effect 
 			else:
 				return # kill if talking is false 
-				
-		await get_tree().create_timer(advanceDelay).timeout # pause once done
+		
+		print("await 1")
+		await advanceConvo
+		print("await 2")
+		#await get_tree().create_timer(advanceDelay).timeout # pause once done
 		
 		if conversation.size() - 1 > interactions: # if there are more dialouges
 			interactions = interactions + 1 # increment interaction counter
@@ -133,7 +142,6 @@ func cleanUpLabels(speaker : RichTextLabel, body : RichTextLabel):
 	speaker.pop() # pop current color off the stack for next assignment
 	speaker.remove_paragraph(0) # clean speaker
 	body.remove_paragraph(0) # clean body text
-
 
 func _on_toggle_pause():
 	pauseIcon.visible = !pauseIcon.visible
