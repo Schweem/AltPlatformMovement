@@ -116,14 +116,21 @@ func move(delta):
 		sprite.scale.x = dir
 		
 	if wallMark.is_colliding():
-		if wallMark.get_collider != null:
-			if wallMark.get_collider().is_in_group("walls"):
-				sprite.play("idle")
-				return 
-		else:
+		var collider = wallMark.get_collider() # grab the collider
+		if collider and collider.is_in_group("walls"): # check for wall tage
+			var collision_point = wallMark.get_collision_point() # get the collision point
+			var normal = wallMark.get_collision_normal() 
+			var distance = wallMark.global_position.distance_to(collision_point) # grab the distance from the collision point
+			var push_distance = wallMark.target_position.length() - distance + 0.1 # smallest distance from the wall
+			if push_distance > 0: # we can walk
+				# Move the world away from the wall
+				worldSpace.position.x += normal * push_distance
+			sprite.play("idle")
+		else: # 
+			# Handle non-wall collisions
 			pass
 	else:
-		if !lockedIn: #if not talking
+		if !lockedIn: # if not talking
 			# move the world 
 			worldSpace.position.x += -dir * SPEED * delta
 
