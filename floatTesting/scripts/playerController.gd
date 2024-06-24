@@ -35,6 +35,7 @@ const JUMPSPEED : float = 500.0 # mult
 var topColArray : Array = []
 var botColArray : Array = []
 
+var safePlace = Vector2.ZERO
 var activeCollisions : int = 0
 
 var jumpTarget : float = JUMPHEIGHT
@@ -122,6 +123,8 @@ func move(delta):
 			var normal = wallMark.get_collision_normal() 
 			var distance = wallMark.global_position.distance_to(collision_point) # grab the distance from the collision point
 			var push_distance = wallMark.target_position.length() - distance + 0.1 # smallest distance from the wall
+			if distance < 0.1:
+				worldSpace.position = safePlace # go to the safe place 
 			if push_distance > 0: # we can walk
 				# Move the world away from the wall
 				worldSpace.position.x += normal * push_distance
@@ -133,6 +136,7 @@ func move(delta):
 		if !lockedIn: # if not talking
 			# move the world 
 			worldSpace.position.x += -dir * SPEED * delta
+		safePlace = worldSpace.position # update the last "safe place"
 
 # func -- animate
 # args -- NONE 
@@ -205,7 +209,6 @@ func checkDownCol():
 		if botCheckRay.is_colliding(): # collision
 			var collider = botCheckRay.get_collider()
 			if collider != null:
-				
 				if collider.is_in_group("enemy"):
 					var target = collider
 					worldSpace.position.y += JUMPHEIGHT
@@ -218,7 +221,7 @@ func checkDownCol():
 				elif collider.is_in_group("walls"): # with the walls + floor
 					var distance = floor(position.y - botCheckRay.get_collision_point().y) # calculate distance to point
 					
-					if distance < 0: # more than 0?
+					if distance <= 0: # more than 0?
 						grounded = true # we are grounded 
 						lerp(worldSpace.position.y, worldSpace.position.y + distance, 0.1) # quickly adjust worldspace by distance 
 						distance = floor(position.y - botCheckRay.get_collision_point().y) # reset distance 
